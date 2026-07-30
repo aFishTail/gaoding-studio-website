@@ -229,6 +229,9 @@ button { color: inherit; }
 .light-link a { border-color: #fff; }
 
 .case-visual { height: 265px; position: relative; overflow: hidden; background: #eaf2ff; }
+.case-visual-image { background:#071526; }
+.case-visual-image img { display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .45s ease; }
+.case-card:hover .case-visual-image img { transform:scale(1.025); }
 .visual-dashboard { padding: 34px; background: linear-gradient(135deg, #ddeeff, #96bdff); }
 .visual-dashboard.cyan { background: linear-gradient(135deg, #dff9ff, #88d7e8); }
 .dash-window { width: 100%; height: 100%; display: flex; background: #07182f; border-radius: 7px; box-shadow: 0 23px 35px rgba(17,57,120,.25); transform: perspective(800px) rotateX(4deg) rotateY(-5deg); }
@@ -356,6 +359,8 @@ button { color: inherit; }
 .detail-meta small { color:var(--muted);font-size:9px; }
 .detail-meta b { font-size:10px;line-height:1.65;font-weight:600; }
 .detail-visual .case-visual { height:600px; }
+.detail-visual .case-visual-image { height:auto;aspect-ratio:32 / 9; }
+.detail-visual .case-visual-image img { object-fit:contain; }
 .detail-visual .visual-dashboard { padding:80px; }
 .detail-visual .dash-window { border-radius:14px; }
 .case-story { padding-block:120px; }
@@ -466,7 +471,7 @@ button { color: inherit; }
   .footer-grid { grid-template-columns:1.5fr 1fr 1fr; }
   .footer-grid > div:last-child { display:none; }
   .detail-title,.story-grid,.about-copy,.contact-page { grid-template-columns:1fr;gap:50px; }
-  .detail-visual .case-visual { height:460px; }
+  .detail-visual .case-visual:not(.case-visual-image) { height:460px; }
   .contact-intro { position:static; }
   .values { grid-template-columns:repeat(2,1fr); }
   .values article:nth-child(2) { border-right:0; }
@@ -509,7 +514,7 @@ button { color: inherit; }
   .service-cta { padding:30px;display:block; }
   .service-cta .button { margin-top:25px; }
   .detail-title { gap:35px; }
-  .detail-visual .case-visual { height:300px; }
+  .detail-visual .case-visual:not(.case-visual-image) { height:300px; }
   .detail-visual .visual-dashboard { padding:30px; }
   .case-story { padding-block:80px; }
   .story-grid h2 { font-size:35px; }

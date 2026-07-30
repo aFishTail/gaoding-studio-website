@@ -10,6 +10,10 @@ export type CaseItem = {
   summary: string;
   visual: "dashboard" | "system" | "mobile" | "ai" | "brand" | "commerce";
   tone: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
 };
 
 export const services = [
@@ -36,6 +40,10 @@ export const cases: CaseItem[] = [
     summary: "覆盖产能、安全、设备与人员四大场景，为管理者建立统一的数据视角。",
     visual: "dashboard",
     tone: "blue",
+    image: {
+      src: "/cases/mine-dashboard.png",
+      alt: "天津矿山协同管控平台数据大屏",
+    },
   },
   {
     slug: "smart-ops",

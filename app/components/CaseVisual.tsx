@@ -1,6 +1,14 @@
 import type { CaseItem } from "../data";
 
 export function CaseVisual({ item }: { item: CaseItem }) {
+  if (item.image) {
+    return (
+      <div className="case-visual case-visual-image">
+        <img src={item.image.src} alt={item.image.alt} />
+      </div>
+    );
+  }
+
   if (item.visual === "mobile") {
     return <div className={`case-visual visual-mobile ${item.tone}`}><div className="phone p1"><i /><b /><span /><span /><em /></div><div className="phone p2"><i /><b /><span /><span /><em /></div><div className="visual-bubble">+21%</div></div>;
   }
