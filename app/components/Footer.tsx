@@ -16,8 +16,8 @@ export function Footer() {
         </div>
         <div>
           <small>联系</small>
-          <a href="mailto:wheng0913@gmail.com">1765174487@qq.com</a>
-          <a href="tel:+8618688880008">18951802660</a>
+          <a href="mailto:1765174487@qq.com">1765174487@qq.com</a>
+          <a href="tel:+8618688880008">15895881789</a>
         </div>
         <div>
           <small>导航</small>

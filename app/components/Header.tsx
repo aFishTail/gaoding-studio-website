@@ -49,9 +49,10 @@ export function Header() {
           <button
             className={open ? "menu-toggle active" : "menu-toggle"}
             onClick={() => setOpen(!open)}
-            aria-label="打开菜单"
+            aria-label={open ? "关闭菜单" : "打开菜单"}
             aria-expanded={open}
           >
+            <i />
             <i />
             <i />
           </button>

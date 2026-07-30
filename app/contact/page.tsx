@@ -26,11 +26,11 @@ export default function ContactPage() {
           <div className="contact-direct">
             <div>
               <small>邮箱</small>
-              <a href="mailto:hello@gaoding.studio">hello@gaoding.studio ↗</a>
+              <a href="mailto:1765174487@qq.com">1765174487@qq.com</a>
             </div>
             <div>
               <small>电话 / 微信</small>
-              <a href="tel:+8618688880008">186 8888 0008</a>
+              <a href="tel:+8618688880008">15895881789</a>
             </div>
             <div>
               <small>回复时间</small>
