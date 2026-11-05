@@ -9,6 +9,20 @@ export function CaseVisual({ item }: { item: CaseItem }) {
     );
   }
 
+  if (item.visual === "mobile" && item.screens && item.screens.length >= 2) {
+    return (
+      <div className={`case-visual visual-mobile visual-mobile-screens ${item.tone}`}>
+        <div className="phone p1 phone-screen">
+          <img src={item.screens[0].src} alt={item.screens[0].alt} />
+        </div>
+        <div className="phone p2 phone-screen">
+          <img src={item.screens[1].src} alt={item.screens[1].alt} />
+        </div>
+        {item.demo ? <div className="visual-bubble">可在线交互体验</div> : null}
+      </div>
+    );
+  }
+
   if (item.visual === "mobile") {
     return <div className={`case-visual visual-mobile ${item.tone}`}><div className="phone p1"><i /><b /><span /><span /><em /></div><div className="phone p2"><i /><b /><span /><span /><em /></div><div className="visual-bubble">+21%</div></div>;
   }

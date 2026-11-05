@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CaseDemo } from "../../components/CaseDemo";
 import { CaseVisual } from "../../components/CaseVisual";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
@@ -15,6 +16,17 @@ export default async function CaseDetail({ params }: { params: Promise<{ slug: s
   if (!item) notFound();
   const related = cases.find((entry) => entry.slug !== item.slug)!;
 
+  const storyHeading = item.story?.heading ?? ["从分散信息，", "到统一决策视角"];
+  const storyParagraphs = item.story?.paragraphs ?? [
+    "团队原本需要在多套系统与表格之间来回切换，关键数据更新不同步，现场异常也难以及时发现。我们从真实使用场景出发，重组指标层级和操作路径。",
+    "最终成果不仅是一套更好看的界面，更是一套能被日常工作真正使用的产品系统。",
+  ];
+  const storyResults = item.story?.results ?? [
+    { value: "1", label: "统一数据入口" },
+    { value: "24h", label: "关键状态实时更新" },
+    { value: "38%", label: "信息查找效率提升" },
+  ];
+
   return (
     <main id="top">
       <Header />
@@ -24,13 +36,35 @@ export default async function CaseDetail({ params }: { params: Promise<{ slug: s
           <div><span className="section-index">{item.category} / {item.industry}</span><h1>{item.title}</h1><p>{item.summary}</p></div>
           <div className="detail-meta"><div><small>项目周期</small><b>{item.duration}</b></div><div><small>服务内容</small><b>{item.services.join(" · ")}</b></div><div><small>技术方案</small><b>{item.technology.join(" · ")}</b></div></div>
         </div>
-        <div className="detail-visual"><CaseVisual item={item} /></div>
+        {!item.demo ? (
+          <div className="detail-visual"><CaseVisual item={item} /></div>
+        ) : null}
       </section>
+
+      {item.demo ? <CaseDemo item={item} /> : null}
 
       <section className="case-story shell">
         <span className="section-index">PROJECT OVERVIEW</span>
-        <div className="story-grid"><h2>从分散信息，<br />到统一决策视角</h2><div><p>团队原本需要在多套系统与表格之间来回切换，关键数据更新不同步，现场异常也难以及时发现。我们从真实使用场景出发，重组指标层级和操作路径。</p><p>最终成果不仅是一套更好看的界面，更是一套能被日常工作真正使用的产品系统。</p></div></div>
-        <div className="result-cards"><article><strong>1</strong><span>统一数据入口</span></article><article><strong>24h</strong><span>关键状态实时更新</span></article><article><strong>38%</strong><span>信息查找效率提升</span></article></div>
+        <div className="story-grid">
+          <h2>
+            {storyHeading[0]}
+            <br />
+            {storyHeading[1]}
+          </h2>
+          <div>
+            {storyParagraphs.map((paragraph, idx) => (
+              <p key={idx}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+        <div className="result-cards">
+          {storyResults.map((res) => (
+            <article key={res.label}>
+              <strong>{res.value}</strong>
+              <span>{res.label}</span>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="timeline-section">

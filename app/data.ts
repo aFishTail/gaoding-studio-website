@@ -1,3 +1,9 @@
+export type CaseTourStep = {
+  title: string;
+  description: string;
+  route: string;
+};
+
 export type CaseItem = {
   slug: string;
   title: string;
@@ -13,6 +19,20 @@ export type CaseItem = {
   image?: {
     src: string;
     alt: string;
+  };
+  screens?: {
+    src: string;
+    alt: string;
+  }[];
+  demo?: {
+    href: string;
+    device: "phone";
+    tour: CaseTourStep[];
+  };
+  story?: {
+    heading: [string, string];
+    paragraphs: string[];
+    results: { value: string; label: string }[];
   };
 };
 
@@ -43,6 +63,88 @@ export const cases: CaseItem[] = [
     image: {
       src: "/cases/mine-dashboard.png",
       alt: "天津矿山协同管控平台数据大屏",
+    },
+  },
+  {
+    slug: "english-mate",
+    title: "拿来练英语 · AI 英语学习小程序",
+    category: "小程序 / App",
+    industry: "教育与语言学习",
+    duration: "2 周",
+    services: ["产品设计", "UI 设计", "小程序开发", "AI 能力接入"],
+    technology: ["微信小程序", "TypeScript", "CloudBase", "大模型 / ASR / TTS"],
+    outcome: "把用户自己的资料，变成能回忆、能开口的英语练习。",
+    summary:
+      "支持拍照、PDF 或粘贴英文导入，经 AI 整理与人工确认后生成专属学习单元，串联快速回忆、造句批改、场景语音对练与复盘的完整闭环。",
+    visual: "mobile",
+    tone: "terracotta",
+    screens: [
+      {
+        src: "/cases/english-mate/home.jpg",
+        alt: "拿来练英语小程序首页界面",
+      },
+      {
+        src: "/cases/english-mate/session.jpg",
+        alt: "拿来练英语小程序对练准备界面",
+      },
+    ],
+    demo: {
+      href: "/demos/english-mate",
+      device: "phone",
+      tour: [
+        {
+          title: "01 · 首页（个人语言手册）",
+          description: "英文学习内容优先呈现，支持切换快速/完整学习模式与打卡海报分享。",
+          route: "/pages/home/index",
+        },
+        {
+          title: "02 · 添加资料与 AI 解析",
+          description: "支持图片、PDF、文本三种导入方式，三步解析流自动提炼词句与场景。",
+          route: "/packages/material/pages/add/index",
+        },
+        {
+          title: "03 · 学习内容确认",
+          description: "勾选、筛选或删除提取出的单词、表达、语法与场景，标记待核对原文。",
+          route: "/packages/material/pages/confirm/index?draftId=draft-demo",
+        },
+        {
+          title: "04 · 学习单元详情",
+          description: "汇总单元学习进度，串联单词/表达/语法回忆、消消乐、造句与场景对练。",
+          route: "/packages/study/pages/lesson-detail/index?id=lesson-smalltalk",
+        },
+        {
+          title: "05 · 先回忆后揭示卡片",
+          description: "正面只给英文提示，自主思考后揭晓释义与例句，按不熟/有印象/掌握调度复习。",
+          route: "/packages/study/pages/review/index?lessonId=lesson-smalltalk&type=word&practice=1",
+        },
+        {
+          title: "06 · 造句批改与三档润色",
+          description: "针对引导、中文或情景题作答，提供逐处纠错与简单自然/地道口语/商务正式三档润色。",
+          route: "/packages/study/pages/sentence/index?lessonId=lesson-smalltalk",
+        },
+        {
+          title: "07 · AI 场景语音对练",
+          description: "围绕明确对话目标与角色开口练习，支持三级提示、AI 表达建议与结束复盘。",
+          route: "/packages/practice/pages/session/index?scenarioId=sc-networking&lessonId=lesson-smalltalk",
+        },
+        {
+          title: "08 · 单词消消乐与学习统计",
+          description: "六组中英配对巩固记忆，配合七日学习时长柱状图记录持续积累。",
+          route: "/packages/study/pages/game/index?lessonId=lesson-smalltalk",
+        },
+      ],
+    },
+    story: {
+      heading: ["从自有资料出发，", "走到真正开口表达"],
+      paragraphs: [
+        "传统背单词应用往往围绕通用词库打转，学习者手头的课程讲义、外刊段落和工作邮件很难直接变成可复习、可练习的内容。我们以「个人语言手册」为设计主轴，用纸白画布、墨色排版与陶橙状态点，让用户自己的英文内容成为界面焦点。",
+        "从拍照/PDF/文本导入、AI 提炼与人工核对确认，到先回忆后揭示的卡片、三档风格润色的造句练习，再到不打断对话的 AI 场景语音对练与集中复盘，帮助用户围绕同一份资料走完「认识 → 主动输出 → 场景使用 → 间隔复习」的完整闭环。",
+      ],
+      results: [
+        { value: "3", label: "资料导入方式（图片 / PDF / 文本）" },
+        { value: "5", label: "从整理到复盘的完整学习闭环" },
+        { value: "3", label: "AI 造句润色风格档位" },
+      ],
     },
   },
   {

@@ -19,7 +19,8 @@ export function CaseGallery({ items, compact = false }: { items: CaseItem[]; com
         {visible.map((item, index) => (
           <Link href={`/cases/${item.slug}`} className="case-card" key={item.slug}>
             <CaseVisual item={item} />
-            <div className="case-card-copy"><span>{item.category} · {item.industry}</span><h3>{item.title}</h3><p>{item.outcome}</p><div><small>{item.duration}</small><b>查看案例 ↗</b></div></div>
+            {item.demo ? <span className="case-demo-badge">在线体验</span> : null}
+            <div className="case-card-copy"><span>{item.category} · {item.industry}</span><h3>{item.title}</h3><p>{item.outcome}</p><div><small>{item.duration}</small><b>{item.demo ? "在线体验 Demo ↗" : "查看案例 ↗"}</b></div></div>
             <em>{String(index + 1).padStart(2, "0")}</em>
           </Link>
         ))}
