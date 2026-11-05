@@ -11,7 +11,7 @@ import { useSetData } from "../runtime/useSetData";
 import { useWx } from "../runtime/wx";
 import type { DashboardData, DashboardFocusContent } from "../types";
 
-export function HomePage() {
+export function HomePage({ query = {} }: { query?: Record<string, string> }) {
   const { navigateTo, switchTab, showSeq } = useEmRouter();
   const { showToast } = useWx();
 
@@ -27,7 +27,7 @@ export function HomePage() {
     taskSummary: "",
     startLabel: "开始今日学习",
     startDisabled: false,
-    shareVisible: false,
+    shareVisible: query.share === "1",
   });
 
   const refresh = useCallback(async () => {

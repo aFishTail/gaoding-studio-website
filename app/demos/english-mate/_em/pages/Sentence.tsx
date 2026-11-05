@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect } from "react";
 import { MateIcon } from "../components/MateIcon";
+import { PRESET_SENTENCE_FEEDBACKS } from "../mock/data";
 import { mateService } from "../mock/service";
 import { useEmRouter } from "../runtime/router";
 import { speakText, stopAudio } from "../runtime/tts";
@@ -85,6 +86,12 @@ export function SentencePage({ query }: { query: Record<string, string> }) {
       const defaultStyle = (bootstrap?.user?.polishStyle ||
         "natural") as PolishStyle;
       const firstTask = tasks[0] || null;
+      const preSubmitted = query.submitted === "1";
+      const preSample = firstTask ? getSampleForTask(firstTask) : "";
+      const preFeedback =
+        preSubmitted && firstTask
+          ? PRESET_SENTENCE_FEEDBACKS[firstTask.id] || PRESET_SENTENCE_FEEDBACKS["st-1"]
+          : null;
       setData({
         lessonId: lesson.id,
         tasks,
@@ -95,12 +102,12 @@ export function SentencePage({ query }: { query: Record<string, string> }) {
         finished: tasks.length === 0,
         defaultStyle,
         activeStyle: defaultStyle,
-        input: "",
-        hasInput: false,
-        feedback: null,
-        submitted: false,
+        input: preSubmitted ? preSample : "",
+        hasInput: preSubmitted ? preSample.trim().length > 0 : false,
+        feedback: preFeedback,
+        submitted: preSubmitted && Boolean(preFeedback),
         saved: false,
-        errorMistakes: [],
+        errorMistakes: preFeedback?.mistakes || [],
         keywordsText: firstTask ? renderKeywords(firstTask) : "",
       });
     } catch (error) {
@@ -108,7 +115,7 @@ export function SentencePage({ query }: { query: Record<string, string> }) {
       setData({ loading: false, loadError: msg });
       showToast({ title: msg, icon: "none" });
     }
-  }, [lessonId, setData, showToast]);
+  }, [lessonId, query.submitted, setData, showToast]);
 
   useEffect(() => {
     void load();

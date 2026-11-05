@@ -16,9 +16,10 @@ export const viewport: Viewport = {
 export default async function EnglishMateDemoPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ frame?: string }>;
+  searchParams?: Promise<{ frame?: string; view?: string }>;
 }) {
   const resolved = searchParams ? await searchParams : {};
   const isFrame = resolved?.frame === "1";
-  return <EnglishMateApp initialFrame={isFrame} />;
+  const initialView = resolved?.view === "artboards" ? "artboards" : "single";
+  return <EnglishMateApp initialFrame={isFrame} initialView={initialView} />;
 }

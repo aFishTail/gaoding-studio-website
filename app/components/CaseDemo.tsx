@@ -109,6 +109,14 @@ export function CaseDemo({ item }: { item: CaseItem }) {
                 重置演示数据
               </button>
               <Link
+                href={`${demo.href}?view=artboards`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="demo-btn"
+              >
+                20 页全画板平铺 ↗
+              </Link>
+              <Link
                 href={demo.href}
                 target="_blank"
                 rel="noopener noreferrer"

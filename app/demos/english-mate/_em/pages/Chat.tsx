@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import { MateIcon } from "../components/MateIcon";
+import { PRACTICE_SCRIPTS } from "../mock/data";
 import { mateService } from "../mock/service";
 import { useEmRouter } from "../runtime/router";
 import { speakText, stopAudio } from "../runtime/tts";
@@ -132,6 +133,24 @@ export function ChatPage({ query }: { query: Record<string, string> }) {
           }
         }
 
+        if (query.demoTurns === "1") {
+          const script = PRACTICE_SCRIPTS["sc-networking"];
+          initialMessages.push(
+            {
+              role: "user",
+              text: script.userSamples[0],
+              suggestionState: "ready",
+              suggestionVisible: true,
+              suggestionExpression: script.suggestions[0].expression,
+              suggestionExplanation: script.suggestions[0].explanation,
+            },
+            {
+              role: "ai",
+              text: script.aiReplies[0],
+            },
+          );
+        }
+
         const userTurnsCount = initialMessages.filter((m) => m.role === "user").length;
 
         setData({
@@ -139,6 +158,7 @@ export function ChatPage({ query }: { query: Record<string, string> }) {
           mode,
           guidedVisible: mode !== "free",
           scenarioName,
+          scenarioExpanded: query.demoTurns === "1",
           userRole: scenario.userRole || "你",
           aiRole: scenario.aiRole || "AI",
           goal: scenario.goal || "",
@@ -163,11 +183,13 @@ export function ChatPage({ query }: { query: Record<string, string> }) {
       clearVoiceTimers();
       stopAudio();
     };
-  }, [query.sessionId, query.mode, clearVoiceTimers, setData, setNavigationBarTitle, showToast]);
+  }, [query.sessionId, query.mode, query.demoTurns, clearVoiceTimers, setData, setNavigationBarTitle, showToast]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [data.messages.length, data.hintVisible, data.sending]);
+    if (data.messages.length > 1 && !query.demoTurns) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [data.messages.length, data.hintVisible, data.sending, query.demoTurns]);
 
   function toggleScenario() {
     setData({ scenarioExpanded: !ref.current.scenarioExpanded });

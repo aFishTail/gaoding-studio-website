@@ -2,9 +2,16 @@
 
 import { showGlobalToast } from "./wx";
 
+let autoSpeakMuted = false;
+
+export function setTtsAutoSpeakMuted(muted: boolean): void {
+  autoSpeakMuted = muted;
+}
+
 export async function speakText(text: string, options?: { silent?: boolean }): Promise<void> {
   const clean = (text || "").trim();
   if (!clean || typeof window === "undefined") return;
+  if (options?.silent && autoSpeakMuted) return;
   if ("speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined") {
     try {
       window.speechSynthesis.cancel();

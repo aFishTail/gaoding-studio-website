@@ -65,6 +65,11 @@ export function ParsingPage({ query }: { query: Record<string, string> }) {
       });
     };
 
+    if (query.static === "1") {
+      applyStep(1);
+      return;
+    }
+
     applyStep(0);
 
     timers.push(
@@ -89,7 +94,7 @@ export function ParsingPage({ query }: { query: Record<string, string> }) {
     return () => {
       timers.forEach((t) => clearTimeout(t));
     };
-  }, [query.type, redirectTo, setData]);
+  }, [query.type, query.static, redirectTo, setData]);
 
   function viewSource() {
     if (!data.materialId) return;

@@ -160,14 +160,24 @@ const RouterContext = createContext<RouterContextValue | null>(null);
 export function RouterProvider({
   children,
   onResetRequest,
+  initialUrl,
+  syncHash = true,
 }: {
   children: React.ReactNode;
   onResetRequest?: () => void;
+  initialUrl?: string;
+  syncHash?: boolean;
 }) {
   const { showToast, setNavigationBarTitle, setTabBarHidden, dismissOverlays } = useWx();
   const [stack, setStack] = useState<StackEntry[]>(() => {
     const home = createEntry("/pages/home/index")!;
-    if (typeof window !== "undefined" && window.location.hash.length > 1) {
+    if (initialUrl) {
+      const target = createEntry(initialUrl);
+      if (target) {
+        return target.isTab ? [target] : [home, target];
+      }
+    }
+    if (syncHash && typeof window !== "undefined" && window.location.hash.length > 1) {
       const hashRoute = decodeURIComponent(window.location.hash.slice(1));
       const target = createEntry(hashRoute);
       if (target) {
@@ -195,6 +205,7 @@ export function RouterProvider({
   }, [dismissOverlays, setNavigationBarTitle, setTabBarHidden]);
 
   useEffect(() => {
+    if (!syncHash) return;
     stopAudio();
     if (typeof window !== "undefined") {
       try {
@@ -209,7 +220,7 @@ export function RouterProvider({
         );
       }
     }
-  }, [current.id, current.fullUrl, current.path, current.key]);
+  }, [syncHash, current.id, current.fullUrl, current.path, current.key]);
 
   const navigateTo = useCallback(
     (url: string) => {
@@ -298,6 +309,7 @@ export function RouterProvider({
   );
 
   useEffect(() => {
+    if (!syncHash) return;
     function onMessage(e: MessageEvent) {
       if (e.origin !== window.location.origin) return;
       const data = e.data;
@@ -313,7 +325,7 @@ export function RouterProvider({
     }
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [jumpFromTour, resetPageChrome, showToast]);
+  }, [syncHash, jumpFromTour, resetPageChrome, showToast]);
 
   return (
     <RouterContext.Provider

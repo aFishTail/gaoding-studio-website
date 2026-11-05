@@ -184,7 +184,7 @@ export function ReviewPage({ query }: { query: Record<string, string> }) {
           loading: false,
           totalCount: cards.length,
           progressPercent: 0,
-          revealed: false,
+          revealed: query.revealed === "1",
           practiceMode,
           practiceAvailable: allOfType.length,
           hasContent: allOfType.length > 0,
@@ -209,7 +209,7 @@ export function ReviewPage({ query }: { query: Record<string, string> }) {
         setData({ loading: false, loadError: msg });
       }
     },
-    [lessonId, setData, type],
+    [lessonId, query.revealed, setData, type],
   );
 
   useEffect(() => {

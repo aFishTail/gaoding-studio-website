@@ -1672,3 +1672,204 @@
   color: var(--muted);
   text-align: center;
 }
+
+/* === Artboards Canvas Overview Mode (20 Screens Side-by-Side for Figma) === */
+.em-artboards-canvas {
+  min-height: 100dvh;
+  background: #E8E6DF;
+  color: #252A28;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+  padding: 28px 40px 80px;
+  box-sizing: border-box;
+}
+.em-artboards-toolbar {
+  position: sticky;
+  top: 16px;
+  z-index: 500;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 2140px;
+  margin: 0 auto 32px;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: rgba(37, 42, 40, 0.94);
+  color: #FAF8F4;
+  box-shadow: 0 12px 32px rgba(20, 24, 22, 0.18);
+  backdrop-filter: blur(10px);
+}
+.em-artboards-toolbar__left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.em-artboards-toolbar__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #B9472F;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.em-artboards-toolbar__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.em-artboards-toolbar__sub {
+  font-size: 13px;
+  color: rgba(250, 248, 244, 0.72);
+}
+.em-artboards-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.em-artboards-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(250, 248, 244, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: #FAF8F4;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+.em-artboards-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.em-artboards-btn--primary {
+  background: #FAF8F4;
+  color: #252A28;
+  border-color: #FAF8F4;
+  font-weight: 600;
+}
+.em-artboards-btn--primary:hover {
+  background: #F3E5DD;
+}
+.em-artboards-group {
+  max-width: 2140px;
+  margin: 0 auto 48px;
+}
+.em-artboards-group__head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(37, 42, 40, 0.14);
+}
+.em-artboards-group__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #252A28;
+}
+.em-artboards-group__desc {
+  font-size: 13px;
+  color: #6B6D65;
+}
+.em-artboards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+  align-items: flex-start;
+}
+.em-artboard-card {
+  width: 390px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.em-artboard-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 4px;
+}
+.em-artboard-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #252A28;
+}
+.em-artboard-tag {
+  font-size: 11px;
+  color: #6B6D65;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.em-artboard-open {
+  border: 0;
+  background: rgba(37, 42, 40, 0.08);
+  color: #252A28;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.em-artboard-open:hover {
+  background: #B9472F;
+  color: #FFFFFF;
+}
+.em-artboard-device {
+  width: 390px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 14px 36px rgba(20, 24, 22, 0.12), 0 0 0 1px rgba(37, 42, 40, 0.12);
+  background: #FAF8F4;
+}
+.em-artboard-device .em-app {
+  width: 390px;
+  height: 844px;
+  max-width: 390px;
+  box-shadow: none;
+}
+.em-artboard-device[data-auto-height="1"] .em-app {
+  height: auto;
+  min-height: 844px;
+  overflow: visible;
+}
+.em-artboard-device[data-auto-height="1"] .em-page-host {
+  height: auto;
+  min-height: 756px;
+  overflow: visible;
+}
+.em-artboard-device[data-auto-height="1"] .em-viewport {
+  height: auto;
+  min-height: 756px;
+  overflow: visible;
+}
+.em-floating-view-switch {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 400;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 42, 40, 0.16);
+  background: #252A28;
+  color: #FAF8F4;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(20, 24, 22, 0.22);
+}
+.em-floating-view-switch:hover {
+  background: #B9472F;
+}
